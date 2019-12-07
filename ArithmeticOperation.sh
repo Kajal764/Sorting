@@ -32,3 +32,19 @@ done
 
 echo "Descending order is"
 echo "${OperationArray[@]}"
+
+for(( i=1;i<=4;i++ ))
+do
+        for(( j=1;j<=4;j++ ))
+        do
+                if [[ ${OperationArray[$i]} -lt ${OperationArray[$j]} ]]
+                then
+                        temp="${OperationArray[$i]}"
+                        OperationArray[$i]="${OperationArray[$j]}"
+                        OperationArray[$j]=$temp
+                fi
+        done
+done
+echo "Ascending order is"
+echo "${OperationArray[@]}"
+
