@@ -16,3 +16,19 @@ do
 	OperationArray[$i]=${Operations["op$i"]}
 done
 echo "${OperationArray[@]}"
+
+for(( i=1;i<=4;i++ ))
+do
+	for(( j=1;j<=4;j++ ))
+	do
+		if [[ ${OperationArray[$i]} -gt ${OperationArray[$j]} ]]
+		then
+			temp="${OperationArray[$i]}"
+			OperationArray[$i]="${OperationArray[$j]}"
+			OperationArray[$j]=$temp
+		fi
+	done
+done
+
+echo "Descending order is"
+echo "${OperationArray[@]}"
