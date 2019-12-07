@@ -6,4 +6,5 @@ read b
 read c
 
 echo $(($a+$b*$c))
+echo $(($a*$b+$c))
 
