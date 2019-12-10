@@ -1,50 +1,40 @@
 #!/bin/bash -x 
 
-declare -A Operations
-declare -a OperationArray
-echo "enter three inputs"
+declare -A operations
+declare -a operationArray
+
+echo "Enter Three Inputs"
 read a
 read b
 read c
-Operations["op1"]=$(($a+$(($b*$c))))
-Operations["op2"]=$(($(($a*$b))+$c))
-Operations["op3"]=$(($c+$(($a/$b))))
-Operations["op4"]=$(($(($a%$b))+$c))
-echo ${!Operations[@]}
-for(( i=1;i<=4;i++ ))
-do
-	OperationArray[$i]=${Operations["op$i"]}
-done
-echo "${OperationArray[@]}"
+
+operations["op1"]=$(( $a + $b * $c ))
+operations["op2"]=$(( $a * $b + $c ))
+operations["op3"]=$(( $c + $a / $b ))
+operations["op4"]=$(( $a % $b + $c ))
 
 for(( i=1;i<=4;i++ ))
 do
-	for(( j=1;j<=4;j++ ))
+	operationArray[$i]=${operations["op$i"]}
+done
+
+echo "${operationArray[@]}"
+
+function getDescArr(){
+	echo "Descending Array is"
+	for(( i=1;i<=4;i++ ))
 	do
-		if [[ ${OperationArray[$i]} -gt ${OperationArray[$j]} ]]
-		then
-			temp="${OperationArray[$i]}"
-			OperationArray[$i]="${OperationArray[$j]}"
-			OperationArray[$j]=$temp
-		fi
-	done
-done
+		echo ${operationArray[$i]}
+	done | sort -nr
+}
 
-echo "Descending order is"
-echo "${OperationArray[@]}"
-
-for(( i=1;i<=4;i++ ))
-do
-        for(( j=1;j<=4;j++ ))
+function getAscArr(){
+	echo "Descending Array is"
+        for(( i=1;i<=4;i++ ))
         do
-                if [[ ${OperationArray[$i]} -lt ${OperationArray[$j]} ]]
-                then
-                        temp="${OperationArray[$i]}"
-                        OperationArray[$i]="${OperationArray[$j]}"
-                        OperationArray[$j]=$temp
-                fi
-        done
-done
-echo "Ascending order is"
-echo "${OperationArray[@]}"
-
+                echo ${operationArray[$i]}
+        done | sort -n
+}
+     
+getDescArr            
+getAscArr
